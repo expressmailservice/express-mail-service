@@ -1,340 +1,586 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Express Mail Service</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ✅ SOLO ESTO NUEVO -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Express Mail Service</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0a0a0a;
-            color: white;
-            margin: 0;
-            opacity: 0;
-            animation: carga 1s ease forwards;
-        }
+<style>
 
-        @keyframes carga {
-            to { opacity: 1; }
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            padding: 15px 40px;
-            border-bottom: 1px solid #222;
-        }
+body{
+    font-family:Arial, sans-serif;
+    color:white;
 
-        .logo {
-            width: 180px;
-        }
+    background:
+    linear-gradient(
+    rgba(0,0,0,.88),
+    rgba(0,0,0,.88)
+    ),
+    url('mapa-mundial.png');
 
-        .menu {
-            display: flex;
-            gap: 20px;
-        }
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 
-        .menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    opacity:0;
+    animation:carga 1s ease forwards;
+}
 
-        .dropdown { position: relative; }
+@keyframes carga{
+    to{
+        opacity:1;
+    }
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: #111;
-            top: 30px;
-            border-radius: 10px;
-        }
+/* HEADER */
 
-        .dropdown-content a {
-            display: block;
-            padding: 10px;
-            color: white;
-        }
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 40px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+}
 
-        .dropdown-content a:hover {
-            background: #222;
-        }
+.logo{
+    width:180px;
+}
 
-        .banner {
-            text-align: center;
-            padding: 40px 20px 10px;
-        }
+.menu{
+    display:flex;
+    gap:25px;
+}
 
-        .box {
-            margin: 30px auto;
-            background: #111;
-            padding: 20px;
-            border-radius: 12px;
-            width: 320px;
-            text-align: center;
-        }
+.menu a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
 
-        button {
-            background: white;
-            border: none;
-            padding: 10px 18px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.menu a:hover{
+    color:#5ea7ff;
+}
 
-        .logo-alfa {
-            width: 110px;
-            margin-top: 10px;
-        }
+.dropdown{
+    position:relative;
+}
 
-        .servicios {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:30px;
+    right:0;
+    background:#10151f;
+    border-radius:10px;
+    overflow:hidden;
+    min-width:180px;
+    z-index:100;
+}
 
-        .servicio {
-            background: #111;
-            padding: 18px;
-            border-radius: 12px;
-            width: 240px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.dropdown-content a{
+    display:block;
+    padding:12px;
+}
 
-        .servicio:hover {
-            transform: translateY(-5px);
-        }
+.dropdown-content a:hover{
+    background:#1c2535;
+}
 
-        .descripcion {
-            max-height: 0;
-            overflow: hidden;
-            transition: 0.3s;
-        }
+/* BANNER */
 
-        .servicio.activo .descripcion {
-            max-height: 250px;
-            margin-top: 10px;
-        }
+.banner{
+    text-align:center;
+    padding:60px 20px 30px;
+}
 
-        .btn-servicio {
-            background: white;
-            color: black;
-            padding: 6px 10px;
-            display: inline-block;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
-            text-decoration: none;
-        }
+.banner h2{
+    font-size:38px;
+    margin-bottom:10px;
+}
 
-        .whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25D366;
-            padding: 15px;
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-        }
+.banner p{
+    color:#c5c5c5;
+}
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #aaa;
-        }
+/* TRAZABILIDAD */
 
-        .direccion {
-            cursor: pointer;
-            text-decoration: underline;
-        }
+.tracking-container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
 
-        /* ✅ SOLO RESPONSIVE (NO CAMBIA TU DISEÑO EN PC) */
-        @media (max-width: 768px) {
+.tracking-container h2{
+    font-size:34px;
+    margin-bottom:20px;
+    text-align:center;
+}
 
-            .header {
-                flex-wrap: wrap;
-                padding: 15px 20px;
-            }
+.tracking-box{
+    display:flex;
+    overflow:hidden;
+    border-radius:10px;
+}
 
-            .menu {
-                width: 100%;
-                flex-wrap: wrap;
-                margin-top: 10px;
-            }
+.tracking-box input{
+    flex:1;
+    padding:18px;
+    border:none;
+    outline:none;
+    font-size:18px;
+    background:#e9e9e9;
+}
 
-            .box {
-                width: 90%;
-            }
+.tracking-box button{
+    background:#9b1c23;
+    color:white;
+    border:none;
+    padding:18px 35px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-            .servicios {
-                flex-direction: column;
-                align-items: center;
-            }
+.tracking-box button:hover{
+    background:#b5242d;
+}
 
-            .servicio {
-                width: 90%;
-            }
+.tracking-info{
+    margin-top:25px;
+    background:rgba(9,20,45,.90);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:25px;
+    display:flex;
+    gap:20px;
+}
 
-            .logo {
-                width: 140px;
-            }
+.icono{
+    font-size:40px;
+}
 
-            .logo-alfa {
-                width: 90px;
-            }
-        }
-    </style>
+.tracking-info h3{
+    margin-bottom:10px;
+}
+
+.tracking-info p{
+    color:#d9d9d9;
+    line-height:1.6;
+}
+
+.tracking-info small{
+    color:#9fa8b7;
+}
+
+/* SERVICIOS */
+
+.servicios{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    padding:50px 20px;
+}
+
+.servicio{
+    width:280px;
+    background:rgba(17,17,17,.85);
+    border:1px solid rgba(94,167,255,.15);
+    border-radius:15px;
+    padding:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.servicio:hover{
+    transform:translateY(-8px);
+    border-color:#5ea7ff;
+}
+
+.descripcion{
+    max-height:0;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.servicio.activo .descripcion{
+    max-height:300px;
+    margin-top:15px;
+}
+
+.btn-servicio{
+    display:inline-block;
+    margin-top:15px;
+    text-decoration:none;
+    color:black;
+    background:white;
+    padding:8px 12px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#25D366;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:28px;
+    z-index:999;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    padding:40px 20px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer p{
+    margin:8px 0;
+}
+
+.direccion{
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .header{
+        flex-wrap:wrap;
+        padding:20px;
+    }
+
+    .menu{
+        width:100%;
+        margin-top:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .banner h2{
+        font-size:28px;
+    }
+
+    .tracking-box{
+        flex-direction:column;
+    }
+
+    .tracking-box button{
+        width:100%;
+    }
+
+    .tracking-info{
+        flex-direction:column;
+    }
+
+    .servicio{
+        width:95%;
+    }
+
+    .logo{
+        width:140px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="header">
+
     <img src="logo-ems.png" class="logo">
 
     <div class="menu">
+
         <a onclick="recargar()">Inicio</a>
+
         <a onclick="scrollServicios()">Servicios</a>
 
         <div class="dropdown">
+
             <a onclick="toggleMenu(event)">Contacto</a>
+
             <div class="dropdown-content" id="menuContacto">
-                <a href="mailto:expressmailserviceco@gmail.com">📧 Email</a>
-                <a href="https://wa.me/573186298177">💬 WhatsApp</a>
-                <a href="https://maps.app.goo.gl/dQEupPcBpNwrYB5L9" target="_blank">📍 Ubicación</a>
+
+                <a href="mailto:expressmailserviceco@gmail.com">
+                    📧 Email
+                </a>
+
+                <a href="https://wa.me/573186298177">
+                    💬 WhatsApp
+                </a>
+
+                <a href="https://maps.app.goo.gl/dQEupPcBpNwrYB5L9" target="_blank">
+                    📍 Ubicación
+                </a>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 <div class="banner">
+
     <h2>Soluciones Judiciales Rápidas y Confiables</h2>
+
     <p>Gestiones a nivel nacional</p>
+
 </div>
 
-<div class="box">
-    <h2>Consulta de Guías</h2>
-    <p>Consulta el estado de tu envío</p>
+<div class="tracking-container">
 
-    <a href="https://alfamensajes.com/" target="_blank">
-        <button>CONSULTAR</button>
-    </a>
+    <h2>CONOZCA LA TRAZABILIDAD DE SU ENVÍO</h2>
 
-    <br>
-    <img src="logo-alfa.png" class="logo-alfa">
+    <div class="tracking-box">
+
+        <input type="text" placeholder="Ingrese número de guía">
+
+        <a href="https://alfamensajes.com/" target="_blank">
+
+            <button>🔍 Buscar</button>
+
+        </a>
+
+    </div>
+
+    <div class="tracking-info">
+
+        <div class="icono">ℹ️</div>
+
+        <div>
+
+            <h3>Recomendación de uso</h3>
+
+            <p>
+                Salvo que existan razones de término,
+                recomendamos descargar el certificado
+                después de dos (2) días hábiles posteriores
+                al envío para incorporar la mayor evidencia
+                técnica y probatoria posible.
+            </p>
+
+            <br>
+
+            <small>
+                Recuerde: No todo acuse de recibo confirma la recepción efectiva
+                del mensaje y no todo rebote significa que la notificación haya fallado.
+            </small>
+
+        </div>
+
+    </div>
+
 </div>
 
 <div class="servicios" id="servicios">
 
     <div class="servicio">
         📄 Notificaciones Judiciales
+
         <div class="descripcion">
-            Notificaciones judiciales a nivel local y nacional, notificaciones virtuales de acuerdo al Art 8 Ley 2213 de 2022 via E-mail o Whatsapp.
+            Notificaciones judiciales a nivel local y nacional,
+            notificaciones virtuales de acuerdo al Art. 8 Ley 2213 de 2022 vía correo electrónico o WhatsApp.
+
             <br><br>
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Notificaciones" target="_blank" class="btn-servicio">Solicitar servicio</a>
+
+            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Notificaciones"
+               target="_blank"
+               class="btn-servicio">
+
+               Solicitar servicio
+
+            </a>
         </div>
     </div>
 
     <div class="servicio">
         🔍 Consulta de Bienes
+
         <div class="descripcion">
-            Consulta de propiedades a nivel nacional con numero de cedula.
+            Consulta de propiedades a nivel nacional con número de cédula.
+
             <br><br>
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Bienes" target="_blank" class="btn-servicio">Solicitar servicio</a>
+
+            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Bienes"
+               target="_blank"
+               class="btn-servicio">
+
+               Solicitar servicio
+
+            </a>
         </div>
     </div>
 
     <div class="servicio">
         🧾 Localización de Información
+
         <div class="descripcion">
-            Consulta de direcciones, telefonos y correos electronicos con el numero de cedula.
+            Consulta de direcciones, teléfonos y correos electrónicos.
+
             <br><br>
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Informacion" target="_blank" class="btn-servicio">Solicitar servicio</a>
+
+            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Informacion"
+               target="_blank"
+               class="btn-servicio">
+
+               Solicitar servicio
+
+            </a>
         </div>
     </div>
 
     <div class="servicio">
         📢 Publicación de Edictos
+
         <div class="descripcion">
-            Publicacion de edictos en todos los diarios a nivel local, nacional y radiodifusora.
+            Publicación de edictos en diarios locales, nacionales y radiodifusoras.
+
             <br><br>
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Edictos" target="_blank" class="btn-servicio">Solicitar servicio</a>
+
+            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Edictos"
+               target="_blank"
+               class="btn-servicio">
+
+               Solicitar servicio
+
+            </a>
         </div>
     </div>
 
     <div class="servicio">
         📑 Apostilla y Legalización
+
         <div class="descripcion">
-            Gestion de apostilla y legalizacion de documentos para uso internacional.
+            Gestión de apostilla y legalización de documentos para uso internacional.
+
             <br><br>
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Apostilla" target="_blank" class="btn-servicio">Solicitar servicio</a>
+
+            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Apostilla"
+               target="_blank"
+               class="btn-servicio">
+
+               Solicitar servicio
+
+            </a>
         </div>
     </div>
 
 </div>
 
-<a class="whatsapp" href="https://wa.me/573186298177">💬</a>
+<a class="whatsapp" href="https://wa.me/573186298177">
+💬
+</a>
 
 <div class="footer">
+
     <p><strong>Express Mail Service</strong></p>
+
     <p>Cali - Valle del Cauca</p>
-    <p class="direccion" onclick="abrirMapa()">Calle 12 # 5-75 Local 169 c.c. Plaza Caicedo</p>
+
+    <p class="direccion" onclick="abrirMapa()">
+        Calle 12 # 5-75 Local 169 C.C. Plaza Caicedo
+    </p>
+
     <p>📞 WhatsApp: 318 629 8177</p>
+
     <p>🕒 Atención: Lunes a Viernes de 9:00 AM a 5:00 PM</p>
+
 </div>
 
 <script>
-// SERVICIOS
-document.querySelectorAll('.servicio').forEach(serv => {
-    serv.addEventListener('click', function(e) {
+
+document.querySelectorAll('.servicio').forEach(serv=>{
+
+    serv.addEventListener('click',function(e){
+
         e.stopPropagation();
-        document.querySelectorAll('.servicio').forEach(s => s.classList.remove('activo'));
+
+        document.querySelectorAll('.servicio')
+        .forEach(s=>s.classList.remove('activo'));
+
         this.classList.add('activo');
     });
+
 });
 
-// CERRAR SERVICIOS
-document.addEventListener('click', function() {
-    document.querySelectorAll('.servicio').forEach(s => s.classList.remove('activo'));
+document.addEventListener('click',()=>{
+
+    document.querySelectorAll('.servicio')
+    .forEach(s=>s.classList.remove('activo'));
+
 });
 
-// MENU CONTACTO
-function toggleMenu(e) {
+function toggleMenu(e){
+
     e.stopPropagation();
-    let m = document.getElementById("menuContacto");
-    m.style.display = m.style.display === "block" ? "none" : "block";
+
+    let menu=document.getElementById("menuContacto");
+
+    menu.style.display=
+    menu.style.display==="block"
+    ? "none"
+    : "block";
 }
 
-document.addEventListener("click", () => {
-    document.getElementById("menuContacto").style.display = "none";
+document.addEventListener("click",()=>{
+
+    document.getElementById("menuContacto")
+    .style.display="none";
+
 });
 
-// SCROLL
-function scrollServicios() {
-    document.getElementById("servicios").scrollIntoView({behavior:"smooth"});
+function scrollServicios(){
+
+    document.getElementById("servicios")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
 }
 
-// RECARGAR
-function recargar() {
+function recargar(){
     location.reload();
 }
 
-// MAPA
-function abrirMapa() {
-    window.open("https://maps.app.goo.gl/dQEupPcBpNwrYB5L9", "_blank");
+function abrirMapa(){
+
+    window.open(
+        "https://maps.app.goo.gl/dQEupPcBpNwrYB5L9",
+        "_blank"
+    );
+
 }
+
 </script>
 
 </body>
