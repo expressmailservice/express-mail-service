@@ -1,587 +1,116 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Express Mail Service</title>
+<body>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-    font-family:Arial, sans-serif;
+    background:#000;
     color:white;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,.88),
-    rgba(0,0,0,.88)
-    ),
-    url('mapa-mundial.png');
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-
-    opacity:0;
-    animation:carga 1s ease forwards;
-}
-
-@keyframes carga{
-    to{
-        opacity:1;
-    }
-}
-
-/* HEADER */
-
-.header{
+    font-family:Arial, sans-serif;
+    height:100vh;
     display:flex;
+    justify-content:center;
     align-items:center;
-    justify-content:space-between;
-    padding:20px 40px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(8px);
+    overflow:hidden;
+}
+
+.contenedor{
+    text-align:center;
+    max-width:700px;
+    padding:40px;
 }
 
 .logo{
-    width:180px;
+    width:220px;
+    margin-bottom:30px;
 }
 
-.menu{
-    display:flex;
-    gap:25px;
-}
-
-.menu a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.menu a:hover{
-    color:#5ea7ff;
-}
-
-.dropdown{
-    position:relative;
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:30px;
-    right:0;
-    background:#10151f;
-    border-radius:10px;
-    overflow:hidden;
-    min-width:180px;
-    z-index:100;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:12px;
-}
-
-.dropdown-content a:hover{
-    background:#1c2535;
-}
-
-/* BANNER */
-
-.banner{
-    text-align:center;
-    padding:60px 20px 30px;
-}
-
-.banner h2{
+h1{
     font-size:38px;
-    margin-bottom:10px;
-}
-
-.banner p{
-    color:#c5c5c5;
-}
-
-/* TRAZABILIDAD */
-
-.tracking-container{
-    max-width:1000px;
-    margin:auto;
-    padding:20px;
-}
-
-.tracking-container h2{
-    font-size:34px;
     margin-bottom:20px;
-    text-align:center;
-}
-
-.tracking-box{
-    display:flex;
-    overflow:hidden;
-    border-radius:10px;
-}
-
-.tracking-box input{
-    flex:1;
-    padding:18px;
-    border:none;
-    outline:none;
-    font-size:18px;
-    background:#e9e9e9;
-}
-
-.tracking-box button{
-    background:#9b1c23;
     color:white;
-    border:none;
-    padding:18px 35px;
-    font-weight:bold;
-    cursor:pointer;
 }
 
-.tracking-box button:hover{
-    background:#b5242d;
+p{
+    color:#cfcfcf;
+    line-height:1.8;
+    font-size:18px;
 }
 
-.tracking-info{
+.estado{
     margin-top:25px;
-    background:rgba(9,20,45,.90);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    padding:25px;
-    display:flex;
-    gap:20px;
-}
-
-.icono{
-    font-size:40px;
-}
-
-.tracking-info h3{
-    margin-bottom:10px;
-}
-
-.tracking-info p{
-    color:#d9d9d9;
-    line-height:1.6;
-}
-
-.tracking-info small{
-    color:#9fa8b7;
-}
-
-/* SERVICIOS */
-
-.servicios{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:25px;
-    padding:50px 20px;
-}
-
-.servicio{
-    width:280px;
-    background:rgba(17,17,17,.85);
-    border:1px solid rgba(94,167,255,.15);
-    border-radius:15px;
-    padding:20px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.servicio:hover{
-    transform:translateY(-8px);
-    border-color:#5ea7ff;
-}
-
-.descripcion{
-    max-height:0;
-    overflow:hidden;
-    transition:.4s;
-}
-
-.servicio.activo .descripcion{
-    max-height:300px;
-    margin-top:15px;
-}
-
-.btn-servicio{
     display:inline-block;
-    margin-top:15px;
-    text-decoration:none;
-    color:black;
-    background:white;
-    padding:8px 12px;
-    border-radius:5px;
+    padding:12px 20px;
+    background:#a51d26;
+    border-radius:8px;
     font-weight:bold;
 }
 
-/* WHATSAPP */
+.contacto{
+    margin-top:35px;
+}
 
-.whatsapp{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    background:#25D366;
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.contacto a{
+    color:white;
     text-decoration:none;
-    font-size:28px;
-    z-index:999;
+    font-weight:bold;
 }
 
-/* FOOTER */
-
-.footer{
-    text-align:center;
-    padding:40px 20px;
-    border-top:1px solid rgba(255,255,255,.08);
+.globo{
+    position:fixed;
+    top:-300px;
+    left:-350px;
+    width:1200px;
+    opacity:.08;
+    animation:girar 180s linear infinite;
+    z-index:-1;
 }
 
-.footer p{
-    margin:8px 0;
-}
-
-.direccion{
-    cursor:pointer;
-    text-decoration:underline;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-    .header{
-        flex-wrap:wrap;
-        padding:20px;
+@keyframes girar{
+    from{
+        transform:rotate(0deg);
     }
-
-    .menu{
-        width:100%;
-        margin-top:15px;
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .banner h2{
-        font-size:28px;
-    }
-
-    .tracking-box{
-        flex-direction:column;
-    }
-
-    .tracking-box button{
-        width:100%;
-    }
-
-    .tracking-info{
-        flex-direction:column;
-    }
-
-    .servicio{
-        width:95%;
-    }
-
-    .logo{
-        width:140px;
+    to{
+        transform:rotate(360deg);
     }
 }
-
 </style>
-</head>
 
-<body>
+<img src="mapa-fondo.png" class="globo">
 
-<div class="header">
+<div class="contenedor">
 
     <img src="logo-ems.png" class="logo">
 
-    <div class="menu">
-
-        <a onclick="recargar()">Inicio</a>
-
-        <a onclick="scrollServicios()">Servicios</a>
-
-        <div class="dropdown">
-
-            <a onclick="toggleMenu(event)">Contacto</a>
-
-            <div class="dropdown-content" id="menuContacto">
-
-                <a href="mailto:expressmailserviceco@gmail.com">
-                    📧 Email
-                </a>
-
-                <a href="https://wa.me/573186298177">
-                    💬 WhatsApp
-                </a>
-
-                <a href="https://maps.app.goo.gl/dQEupPcBpNwrYB5L9" target="_blank">
-                    📍 Ubicación
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="banner">
-
-    <h2>Soluciones Judiciales Rápidas y Confiables</h2>
-
-    <p>Gestiones a nivel nacional</p>
-
-</div>
-
-<div class="tracking-container">
-
-    <h2>CONOZCA LA TRAZABILIDAD DE SU ENVÍO</h2>
-
-    <div class="tracking-box">
-
-        <input type="text" placeholder="Ingrese número de guía">
-
-        <a href="https://alfamensajes.com/" target="_blank">
-
-            <button>🔍 Buscar</button>
-
-        </a>
-
-    </div>
-
-    <div class="tracking-info">
-
-        <div class="icono">ℹ️</div>
-
-        <div>
-
-            <h3>Recomendación de uso</h3>
-
-            <p>
-                Salvo que existan razones de término,
-                recomendamos descargar el certificado
-                después de dos (2) días hábiles posteriores
-                al envío para incorporar la mayor evidencia
-                técnica y probatoria posible.
-            </p>
-
-            <br>
-
-            <small>
-                Recuerde: No todo acuse de recibo confirma la recepción efectiva
-                del mensaje y no todo rebote significa que la notificación haya fallado.
-            </small>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="servicios" id="servicios">
-
-    <div class="servicio">
-        📄 Notificaciones Judiciales
-
-        <div class="descripcion">
-            Notificaciones judiciales a nivel local y nacional,
-            notificaciones virtuales de acuerdo al Art. 8 Ley 2213 de 2022 vía correo electrónico o WhatsApp.
-
-            <br><br>
-
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Notificaciones"
-               target="_blank"
-               class="btn-servicio">
-
-               Solicitar servicio
-
-            </a>
-        </div>
-    </div>
-
-    <div class="servicio">
-        🔍 Consulta de Bienes
-
-        <div class="descripcion">
-            Consulta de propiedades a nivel nacional con número de cédula.
-
-            <br><br>
-
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Bienes"
-               target="_blank"
-               class="btn-servicio">
-
-               Solicitar servicio
-
-            </a>
-        </div>
-    </div>
-
-    <div class="servicio">
-        🧾 Localización de Información
-
-        <div class="descripcion">
-            Consulta de direcciones, teléfonos y correos electrónicos.
-
-            <br><br>
-
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Informacion"
-               target="_blank"
-               class="btn-servicio">
-
-               Solicitar servicio
-
-            </a>
-        </div>
-    </div>
-
-    <div class="servicio">
-        📢 Publicación de Edictos
-
-        <div class="descripcion">
-            Publicación de edictos en diarios locales, nacionales y radiodifusoras.
-
-            <br><br>
-
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Edictos"
-               target="_blank"
-               class="btn-servicio">
-
-               Solicitar servicio
-
-            </a>
-        </div>
-    </div>
-
-    <div class="servicio">
-        📑 Apostilla y Legalización
-
-        <div class="descripcion">
-            Gestión de apostilla y legalización de documentos para uso internacional.
-
-            <br><br>
-
-            <a href="https://wa.me/573186298177?text=Hola%20quiero%20informacion%20sobre%20Apostilla"
-               target="_blank"
-               class="btn-servicio">
-
-               Solicitar servicio
-
-            </a>
-        </div>
-    </div>
-
-</div>
-
-<a class="whatsapp" href="https://wa.me/573186298177">
-💬
-</a>
-
-<div class="footer">
-
-    <p><strong>Express Mail Service</strong></p>
-
-    <p>Cali - Valle del Cauca</p>
-
-    <p class="direccion" onclick="abrirMapa()">
-        Calle 12 # 5-75 Local 169 C.C. Plaza Caicedo
+    <h1>Sitio Web en Mantenimiento</h1>
+
+    <p>
+        Estimado usuario:
+        <br><br>
+        Nos encontramos realizando labores de actualización y mejora de nuestra plataforma con el fin de brindarle una mejor experiencia de servicio.
+        <br><br>
+        Durante este proceso algunas funcionalidades pueden no estar disponibles temporalmente.
+        Agradecemos su comprensión y le invitamos a visitarnos nuevamente en las próximas horas.
     </p>
 
-    <p>📞 WhatsApp: 318 629 8177</p>
+    <div class="estado">
+        🚧 Mantenimiento Programado
+    </div>
 
-    <p>🕒 Atención: Lunes a Viernes de 9:00 AM a 5:00 PM</p>
+    <div class="contacto">
+        <p>
+            Para información inmediata:
+            <br><br>
+            <a href="https://wa.me/573186298177">
+                📱 WhatsApp: 318 629 8177
+            </a>
+        </p>
+    </div>
 
 </div>
 
-<script>
-
-document.querySelectorAll('.servicio').forEach(serv=>{
-
-    serv.addEventListener('click',function(e){
-
-        e.stopPropagation();
-
-        document.querySelectorAll('.servicio')
-        .forEach(s=>s.classList.remove('activo'));
-
-        this.classList.add('activo');
-    });
-
-});
-
-document.addEventListener('click',()=>{
-
-    document.querySelectorAll('.servicio')
-    .forEach(s=>s.classList.remove('activo'));
-
-});
-
-function toggleMenu(e){
-
-    e.stopPropagation();
-
-    let menu=document.getElementById("menuContacto");
-
-    menu.style.display=
-    menu.style.display==="block"
-    ? "none"
-    : "block";
-}
-
-document.addEventListener("click",()=>{
-
-    document.getElementById("menuContacto")
-    .style.display="none";
-
-});
-
-function scrollServicios(){
-
-    document.getElementById("servicios")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-function recargar(){
-    location.reload();
-}
-
-function abrirMapa(){
-
-    window.open(
-        "https://maps.app.goo.gl/dQEupPcBpNwrYB5L9",
-        "_blank"
-    );
-
-}
-
-</script>
-
 </body>
-</html>
