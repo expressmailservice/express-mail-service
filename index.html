@@ -17,8 +17,11 @@ body{
     background:#000;
     color:white;
     font-family:Arial, sans-serif;
-    min-height:100vh;
-    padding:40px 20px;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
     position:relative;
 }
 
@@ -26,9 +29,9 @@ body{
 
 .globo{
     position:fixed;
-    top:-250px;
-    left:-350px;
-    width:1100px;
+    top:-220px;
+    left:-320px;
+    width:950px;
     opacity:.08;
     animation:girar 240s linear infinite;
     pointer-events:none;
@@ -49,36 +52,35 @@ body{
 .contenedor{
     position:relative;
     z-index:999;
-    max-width:800px;
-    margin:auto;
+    max-width:700px;
     text-align:center;
-    padding:40px;
+    padding:20px;
 }
 
 .logo{
-    width:260px;
-    margin-bottom:30px;
+    width:180px;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:42px;
-    margin-bottom:25px;
+    font-size:32px;
+    margin-bottom:15px;
 }
 
 .mensaje{
     color:#cfcfcf;
-    line-height:1.8;
-    font-size:18px;
-    margin-bottom:35px;
+    line-height:1.5;
+    font-size:16px;
+    margin-bottom:20px;
 }
 
 .estado{
     display:inline-block;
-    padding:14px 24px;
+    padding:12px 18px;
     background:#a51d26;
     border-radius:8px;
     font-weight:bold;
-    margin-bottom:35px;
+    margin-bottom:20px;
 }
 
 /* Botones */
@@ -87,14 +89,13 @@ h1{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:15px;
-    margin-top:10px;
+    gap:12px;
 }
 
 .btn{
     text-decoration:none;
     color:white;
-    padding:14px 24px;
+    padding:12px 20px;
     border-radius:8px;
     font-weight:bold;
     transition:.3s;
@@ -109,13 +110,13 @@ h1{
 }
 
 .btn:hover{
-    transform:translateY(-3px);
+    transform:translateY(-2px);
 }
 
-.footer{
-    margin-top:40px;
+.info{
+    margin-top:18px;
     color:#888;
-    font-size:14px;
+    font-size:13px;
 }
 
 /* Responsive */
@@ -123,25 +124,26 @@ h1{
 @media(max-width:768px){
 
     .logo{
-        width:180px;
+        width:140px;
     }
 
     h1{
-        font-size:30px;
+        font-size:24px;
     }
 
     .mensaje{
-        font-size:16px;
-    }
-
-    .contenedor{
-        padding:20px;
+        font-size:14px;
     }
 
     .globo{
-        width:800px;
-        top:-150px;
-        left:-250px;
+        width:650px;
+        top:-120px;
+        left:-220px;
+    }
+
+    .btn{
+        width:100%;
+        max-width:260px;
     }
 
 }
@@ -160,21 +162,11 @@ h1{
     <h1>Sitio Web en Mantenimiento</h1>
 
     <div class="mensaje">
-
-        Estimado usuario:
-
+        Estimado usuario:<br><br>
+        Nos encontramos realizando labores de actualización y mejora de nuestra plataforma para brindarle una mejor experiencia de servicio.
         <br><br>
-
-        Nos encontramos realizando labores de actualización y mejora de nuestra plataforma con el fin de brindarle una mejor experiencia de servicio.
-
-        <br><br>
-
-        Durante este proceso algunas funcionalidades pueden no estar disponibles temporalmente.
-
-        <br><br>
-
-        Agradecemos su comprensión y le invitamos a visitarnos nuevamente en las próximas horas.
-
+        Algunas funcionalidades pueden no estar disponibles temporalmente.
+        Agradecemos su comprensión.
     </div>
 
     <div class="estado">
@@ -188,12 +180,12 @@ h1{
         </a>
 
         <a href="mailto:expressmailserviceco@gmail.com" class="btn correo">
-            📧 Correo Electrónico
+            📧 Correo
         </a>
 
     </div>
 
-    <div class="footer">
+    <div class="info">
         Express Mail Service · Cali, Valle del Cauca
     </div>
 
