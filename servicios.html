@@ -31,6 +31,27 @@ body{
 }
 
 /* ==========================
+   GLOBO
+========================== */
+
+.globo{
+    position:fixed;
+    top:-250px;
+    left:-350px;
+    width:1200px;
+    opacity:.06;
+    filter: blur(1px);
+    animation:girar 240s linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes girar{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+   
+/* ==========================
    HEADER
 ========================== */
 
@@ -226,6 +247,8 @@ body{
 </head>
 
 <body>
+
+<img src="mapa-fondo.png" class="globo">  ///mapa_de_globo
 
 <header class="header">
 
