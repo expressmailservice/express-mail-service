@@ -30,6 +30,23 @@ body{
     line-height:1.5;
 }
 
+   .globo{
+    position:fixed;
+    top:-250px;
+    left:-350px;
+    width:1200px;
+    opacity:.06;
+    filter: blur(1px);
+    animation:girar 240s linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes girar{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+   
 /* ==========================
    HEADER
 ========================== */
@@ -72,6 +89,9 @@ body{
 
 .menu a:hover{
     text-shadow:0 0 10px white;
+}
+   .activo{
+    background:#a51d26;
 }
 
 /* ==========================
@@ -215,6 +235,8 @@ body{
 
 <body>
 
+   <img src="mapa-fondo.png" class="globo">
+
 <header class="header">
 
     <a href="index.html">
@@ -225,7 +247,7 @@ body{
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Servicios</a>
        <a href="https://alfamensajes.com/" target="_blank">Consulta de Guía</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="activo">Contacto</a>
     </nav>
 
     <img src="logo-alfa.png" class="logo-alfa">
