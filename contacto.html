@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contacto - Express Mail Service</title>
+
+<style>
+
+/* ==========================
+   BASE
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#000;
+    color:white;
+    font-family:'Segoe UI', Arial, sans-serif;
+    overflow-x:hidden;
+    line-height:1.5;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.header{
+    display:grid;
+    grid-template-columns:220px 1fr 120px;
+    align-items:center;
+    padding:20px 40px;
+    border-bottom:1px solid #1a1a1a;
+    position:sticky;
+    top:0;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index:1000;
+}
+
+.logo{
+    width:180px;
+}
+
+.logo-alfa{
+    width:90px;
+    justify-self:end;
+}
+
+.menu{
+    text-align:center;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    text-shadow:0 0 10px white;
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.hero{
+    text-align:center;
+    padding:140px 20px 60px;
+}
+
+.hero h1{
+    font-size:58px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#bdbdbd;
+    font-size:18px;
+    max-width:600px;
+    margin:0 auto;
+}
+
+/* ==========================
+   CONTACTO
+========================== */
+
+.section{
+    padding:40px 20px 100px;
+    display:flex;
+    justify-content:center;
+}
+
+.formulario{
+    width:100%;
+    max-width:500px;
+    background:#111;
+    border:1px solid #1f1f1f;
+    border-radius:15px;
+    padding:30px;
+}
+
+.formulario h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.formulario input,
+.formulario textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:8px;
+    background:#0a0a0a;
+    color:white;
+    outline:none;
+    border:1px solid #222;
+}
+
+.formulario textarea{
+    resize:none;
+    height:120px;
+}
+
+/* ==========================
+   BOTONES
+========================== */
+
+.btn{
+    width:100%;
+    padding:12px;
+    background:#a51d26;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(165,29,38,0.35);
+}
+
+/* ==========================
+   INFO
+========================== */
+
+.info{
+    text-align:center;
+    margin-top:40px;
+    color:#bdbdbd;
+}
+
+.info p{
+    margin:8px 0;
+}
+
+/* ==========================
+   WHATSAPP
+========================== */
+
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:60px;
+    height:60px;
+    background:#25D366;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:28px;
+    z-index:999;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .header{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:15px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html">
+        <img src="logo-ems.png" class="logo">
+    </a>
+
+    <nav class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <img src="logo-alfa.png" class="logo-alfa">
+
+</header>
+
+<section class="hero">
+
+    <h1>CONTACTO</h1>
+
+    <p>
+        Escríbenos y te responderemos lo más pronto posible.
+    </p>
+
+</section>
+
+<section class="section">
+
+    <form class="formulario"
+          action="https://formsubmit.co/expressmailserviceco@gmail.com"
+          method="POST">
+
+        <h2>Formulario de contacto</h2>
+
+        <input type="text" name="nombre" placeholder="Nombre completo" required>
+
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+
+        <input type="text" name="asunto" placeholder="Asunto">
+
+        <textarea name="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+
+        <button class="btn" type="submit">Enviar mensaje</button>
+
+    </form>
+
+</section>
+
+<div class="info">
+
+    <p><strong>WhatsApp:</strong> 318 629 8177</p>
+    <p><strong>Ubicación:</strong> Cali - Valle del Cauca</p>
+    <p><strong>Horario:</strong> Lunes a Viernes 9:00 AM - 5:00 PM</p>
+
+</div>
+
+<a href="https://wa.me/573186298177" target="_blank" class="whatsapp">
+💬
+</a>
+
+</body>
+</html>
