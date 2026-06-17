@@ -229,14 +229,48 @@ body{
 @media(max-width:768px){
 
     .header{
-        grid-template-columns:1fr;
-        text-align:center;
+        display:flex;
+        flex-direction:column;
         gap:15px;
+        padding:20px;
+        text-align:center;
+    }
+
+    .menu{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .menu a{
+        margin:0;
+        font-size:15px;
+        padding:8px 12px;
+    }
+
+    .logo{
+        width:160px;
+    }
+
+    .logo-alfa{
+        width:80px;
+        justify-self:center;
+    }
+
+    .hero{
+        padding:80px 20px 50px;
     }
 
     .hero h1{
-        font-size:38px;
+        font-size:42px;
+        line-height:1.15;
     }
+
+    .hero p{
+        font-size:16px;
+    }
+}
 
     .grid{
         grid-template-columns:1fr;
